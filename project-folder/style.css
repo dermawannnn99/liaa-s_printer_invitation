@@ -1,0 +1,360 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', serif;
+    background-image: url('../assets/wallpaper.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 182, 193, 0.3);
+    z-index: -1;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-top: 20px;
+    padding-bottom: 80px;
+}
+
+/* Title */
+.title {
+    font-family: 'Times New Roman', serif;
+    font-size: 42px;
+    color: #FF1493;
+    text-shadow: 2px 2px 4px #E01180(0, 0, 0, 0.7);
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.title2 {
+    font-family: 'Times New Roman', serif;
+    font-size: 22px;
+    color: #FF1493;
+    text-shadow: 2px 2px 4px #E01180(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Printer */
+.printer {
+    width: 100%;
+    max-width: 450px;
+    height: 100px;
+    background: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 100%);
+    border-radius: 15px 15px 5px 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.printer::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+}
+
+.printer::after {
+    content: '';
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 20px;
+    background: #FF69B4;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.printer-slot {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 6px;
+    background: #333;
+    border-radius: 3px 3px 0 0;
+    z-index: 11;
+}
+
+.printer-light {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 10px;
+    height: 10px;
+    background: #4CAF50;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #4CAF50;
+}
+
+.printer-light.printing {
+    animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Paper Output Area */
+.output-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 500px;
+    position: relative;
+    margin-top: 0;
+    z-index: 5;
+    clip-path: inset(0 0 0 0);
+}
+
+/* Paper Card */
+.paper {
+    width: 300px;
+    height: 424px;
+    background: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: -424px;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paper.printing {
+    animation: printOut 10s linear forwards;
+}
+
+.paper.removing {
+    animation: removeOut 2.5s ease-in forwards;
+}
+
+@keyframes printOut {
+    0% {
+        opacity: 1;
+        top: -424px;
+    }
+    100% {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+@keyframes removeOut {
+    0% {
+        opacity: 1;
+        top: 0;
+    }
+    100% {
+        opacity: 0;
+        top: 500px;
+    }
+}
+
+.paper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Print Button */
+.print-button {
+    background: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFB6C1 100%);
+    color: white;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    padding: 18px 60px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255, 20, 147, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Times New Roman', serif;
+    z-index: 20;
+    overflow: hidden;
+}
+
+.print-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.print-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.print-button:hover {
+    transform: translateX(-50%) translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(255, 20, 147, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.print-button:active {
+    transform: translateX(-50%) translateY(-2px) scale(1.02);
+    box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+}
+
+.print-button:disabled {
+    background: linear-gradient(135deg, #cccccc 0%, #999999 100%);
+    cursor: not-allowed;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.print-button span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Footer License */
+.footer {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+    font-size: 14px;
+    color: #FF1493;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+    font-style: italic;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 8px 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    width: 80%;        /* Atau 100%, atau sesuai kebutuhan */
+    max-width: 800px;  /* Opsional: biar tidak terlalu lebar */
+}
+
+/* Responsive */
+@media (max-width: 450px) {
+    .title {
+        font-size: 34px;
+        margin-bottom: 10px;
+    }
+
+     .title2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .printer {
+        max-width: 95%;
+        height: 80px;
+    }
+
+    .printer::before {
+        top: 12px;
+    }
+
+    .printer::after {
+        bottom: 10px;
+        width: 30px;
+        height: 15px;
+    }
+
+    .printer-light {
+        top: 15px;
+        right: 15px;
+        width: 8px;
+        height: 8px;
+    }
+
+    .paper {
+        width: 250px;
+        height: 353px;
+        top: -353px;
+    }
+
+    @keyframes printOut {
+        0% {
+            opacity: 1;
+            top: -353px;
+        }
+        100% {
+            opacity: 1;
+            top: 0;
+        }
+    }
+
+    @keyframes removeOut {
+        0% {
+            opacity: 1;
+            top: 0;
+        }
+        100% {
+            opacity: 0;
+            top: 400px;
+        }
+    }
+
+    .print-button {
+        padding: 15px 45px;
+        font-size: 18px;
+        bottom: 40px;
+        letter-spacing: 2px;
+    }
+
+    .footer {
+        font-size: 12px;
+        padding: 6px 15px;
+        bottom: 5px;
+    }
+}
