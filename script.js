@@ -1,7 +1,6 @@
 let currentIndex = 0;
 let isPrinting = false;
 
-// GANTI DENGAN PATH FILE GAMBAR ANDA
 const images = [
     '../assets/image1.jpg',  // Gambar 1
     '../assets/image2.jpg',  // Gambar 2
@@ -10,7 +9,6 @@ const images = [
     '../assets/image5.jpg'   // Gambar 5
 ];
 
-// GANTI DENGAN PATH FILE SUARA ANDA
 const soundUrl = '../assets/printer-sound.mp3';  // File suara printer
 
 // Create audio element
